@@ -1,15 +1,15 @@
+// Guarantees.js
 import { useEffect, useState } from "react";
+import { getGuarantees } from "../../api/apiService"; // ייבוא הקריאה ל-API
 import "./Guarantees.css"; // ייבוא קובץ ה-CSS לעיצוב
+
 function Guarantees() {
   const [guarantees, setGuarantees] = useState([]);
+
   useEffect(() => {
     const fetchGuarantees = async () => {
       try {
-        const response = await fetch("https://localhost:7219/api/Guarantees");
-        if (!response.ok) {
-          throw new Error(`Error fetching guarantees: ${response.statusText}`);
-        }
-        const data = await response.json();
+        const data = await getGuarantees();
         console.log("Fetched Guarantees:", data);
         const processedGuarantees = data.map(item => ({
           dateOfPayment: item.dateOfPayment || null,
@@ -21,12 +21,13 @@ function Guarantees() {
         }));
         setGuarantees(processedGuarantees);
       } catch (error) {
-        console.error("Error:", error.message);
         alert("Failed to load guarantees.");
       }
     };
+
     fetchGuarantees();
   }, []);
+
   return (
     <div className="guarantees-container">
       <table className="guarantees-table">
@@ -58,4 +59,5 @@ function Guarantees() {
     </div>
   );
 }
+
 export default Guarantees;

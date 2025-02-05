@@ -7,7 +7,7 @@ namespace BuyRealEstate.Domain.Interfaces
     {
         Task<IEnumerable<Document>> GetAllDocumentsAsync();
         Task<string> GetDocumentBase64ByIdAsync(int id);
-        Task<IEnumerable<Document>> GetAllDocumentsByProjectAsync(int id);
+        Task<IEnumerable<Document>> GetAllDocumentsByProjectAsync(int id, bool isRecipe);
         Task<Document> GetDocumentByIdAsync(int id);
         Task AddDocumentAsync(Document project);
         Task UpdateDocumentAsync(Document project);

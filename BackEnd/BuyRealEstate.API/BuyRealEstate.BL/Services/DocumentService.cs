@@ -22,11 +22,14 @@ namespace BuyRealEstate.Core.Services
             var documents = await _documentRepository.GetAllDocumentsAsync();
             return documents.Select(p => _mapper.Map<DocumentDTO>(p));
         }
-        public async Task<IEnumerable<DocumentDTO>> GetAllDocumentByProjectIdAsync(int id)
+        public async Task<IEnumerable<DocumentDTO>> GetAllDocumentsByProjectIdAsync(int id, bool isRecipe)
         {
-            var documents = await _documentRepository.GetAllDocumentsByProjectAsync(id);
-            return documents.Select(p => _mapper.Map<DocumentDTO>(p));
+            var documents = await _documentRepository.GetAllDocumentsByProjectAsync(id, isRecipe);
+            return documents.Select(d => _mapper.Map<DocumentDTO>(d));
         }
+
+
+
         public async Task<DocumentDTO> GetDocumentByIdAsync(int id)
         {
             var document = await _documentRepository.GetDocumentByIdAsync(id);

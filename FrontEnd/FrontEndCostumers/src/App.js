@@ -1,7 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Login from './Pages/Login';
-import MainPage from './Pages/mainPage';
 import PlotsPage from './Pages/realEstateDetails';
 import VerificationPage from './Pages/VerifyPage';
 import FileListViewer from './Pages/Document/Document';

@@ -18,10 +18,13 @@ namespace BuyRealEstate.Domain.Repositories
         {
             return await _context.Documents.ToListAsync();
         }
-        public async Task<IEnumerable<Document>> GetAllDocumentsByProjectAsync(int id)
+        public async Task<IEnumerable<Document>> GetAllDocumentsByProjectAsync(int id, bool isRecipe)
         {
-            return await _context.Documents.Where(p => p.ProjectID == id).ToListAsync();
+            return await _context.Documents.Where(p => p.ProjectID == id && p.IsRecipt == isRecipe).ToListAsync();
         }
+
+
+
         public async Task<Document> GetDocumentByIdAsync(int id)
         {
             return await _context.Documents.FirstOrDefaultAsync(p => p.ID == id);

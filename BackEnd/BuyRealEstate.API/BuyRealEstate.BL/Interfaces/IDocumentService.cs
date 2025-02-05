@@ -7,7 +7,7 @@ namespace BuyRealEstate.Core.Interfaces
     public interface IDocumentService
     {
         Task<IEnumerable<DocumentDTO>> GetAllDocumentsAsync();
-        Task<IEnumerable<DocumentDTO>> GetAllDocumentByProjectIdAsync(int id);
+        Task<IEnumerable<DocumentDTO>> GetAllDocumentsByProjectIdAsync(int id,bool isrecipe);
         Task<string> GetDocumentBase64ByIdAsync(int id);
         Task<DocumentDTO> GetDocumentByIdAsync(int id);
         Task AddDocumentAsync(DocumentDTO plot);

@@ -61,3 +61,14 @@ button:hover {
     color: #d9534f; /* צבע עבור הודעות שגיאה */
     width: 100%; /* תופס את כל הרוחב */
 }
+.message {
+    background-color: #f9c8d3;
+    color: #d45d6e;
+    border: 1px solid #f5a6b9;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    font-size: 16px;
+  }
+  

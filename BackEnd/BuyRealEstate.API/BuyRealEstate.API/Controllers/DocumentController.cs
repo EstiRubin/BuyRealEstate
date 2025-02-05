@@ -18,7 +18,6 @@ namespace BuyRealEstate.API.Controllers
         public async Task<IActionResult> GetAllDocuments()
         {
             var documents = await _documentService.GetAllDocumentsAsync();
-            // Convert each document's byte array to Base64
             var response = documents.Select(d => new
             {
                 ID = d.ID,
@@ -28,12 +27,26 @@ namespace BuyRealEstate.API.Controllers
             return Ok(response);
         }
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetDocumentsByProjectID(int id)
+        public async Task<IActionResult> GetDocumentsByProjectID(int id, [FromQuery] bool isRecipe)
         {
-            var documents = await _documentService.GetAllDocumentByProjectIdAsync(id);
-            return Ok(documents);
+            try
+            {
+                var documents = await _documentService.GetAllDocumentsByProjectIdAsync(id, isRecipe);
+                if (documents == null || !documents.Any())
+                {
+                    return NotFound($"No documents found for Project ID: {id} (isRecipe: {isRecipe})");
+                }
+
+                return Ok(documents);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error fetching documents: {ex.Message}");
+                return StatusCode(500, "Internal Server Error: Unable to retrieve documents.");
+            }
         }
-        //[HttpGet("{id}")]
+
+
         public async Task<IActionResult> GetDocument(int id)
         {
             var base64Data = await _documentService.GetDocumentBase64ByIdAsync(id);

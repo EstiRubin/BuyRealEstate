@@ -1,5 +1,6 @@
-
+// Payments.js
 import React, { useEffect, useState } from "react";
+import { getPayments } from "../../api/apiService"; // ייבוא הקריאה ל-API
 import "./Paymentsheet.css"; // Import CSS file
 
 function Payments() {
@@ -8,11 +9,7 @@ function Payments() {
   useEffect(() => {
     const fetchPayments = async () => {
       try {
-        const response = await fetch("https://localhost:7219/api/Payment"); // Change to http if no SSL
-        if (!response.ok) {
-          throw new Error(`Error fetching payments: ${response.statusText}`);
-        }
-        const data = await response.json();
+        const data = await getPayments(); // קריאה ל-API
         console.log("Fetched Payments:", data);
 
         const processedPayments = data.map(item => ({
@@ -29,7 +26,6 @@ function Payments() {
 
         setPayments(processedPayments);
       } catch (error) {
-        console.error("Error:", error.message);
         alert("Failed to load payments.");
       }
     };

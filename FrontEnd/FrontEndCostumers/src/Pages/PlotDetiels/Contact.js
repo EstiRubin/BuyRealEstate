@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { sendContactForm } from "../../api/apiService"; // מיובא מהקובץ apiService
 import Header from "../Header";
 
 const Contact = () => {
@@ -39,7 +39,6 @@ const Contact = () => {
       newErrors.message = "ההודעה מכילה תווים אסורים";
     }
     
-
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -78,7 +77,7 @@ const Contact = () => {
     `;
 
     try {
-      await axios.post("https://localhost:7219/api/contact", {
+      await sendContactForm({
         recipientEmail: "liknotnalan@gmail.com",
         subject: "הודעה חדשה מצור קשר",
         message: htmlMessage,
